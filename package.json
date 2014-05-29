@@ -1,5 +1,5 @@
 {
-  "name": "Flot Experiments"
+  "name": "Flot Experiments",
   "version": "0.0.0",
   "description": "Examples and experiments using Flot",
   "main": "app.js",
