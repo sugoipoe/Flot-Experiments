@@ -7,29 +7,144 @@
         <title>Bootstrap 101 Template</title>
 
         <!-- Bootstrap -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/justified-nav.css" rel="stylesheet">
+        <link href="static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="static/css/justified-nav.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <div class="masthead">
-            <h3 class="text-muted"> Flot Examples </h3>
-            <ul class="nav nav-justified">
-                <li class="active"> T1 </li>
-                <li> T2 </li>
-                <li> T3 </li>
-                <li> T4 </li>
-            </ul>
-        </div>
+          <![endif]-->
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/js/bootstrap.min.js"></script>
+        <script src="static/js/bootstrap.min.js"></script>
+        <!-- Include flot -->
+        <script type="text/javascript" src="static/flot/jquery.flot.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="masthead">
+                <h3 class="text-muted"> Flot Examples </h3>
+                <ul class="nav nav-justified">
+                    <li class="active" id ="front">
+                        <a href="#">Front</a> 
+                    </li>
+                    <li id="ExA"> 
+                        <a href="#">Basic Example</a>
+                    </li>
+                    <li id="ExB">
+                        <a href="#">Line Types</a>
+                    </li>
+                    <li id="ExC">
+                        <a href="#">Toggling Series</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="jumbotron">
+                <div id="placeholder" style="width:600px;height:300px;margin: 0 auto;">
+                    <h1> This is a series of examples using Flot </h1>
+                    <p> We use a basic example first, and a few more complicated examples. The latter have real-time updates and content selection </p>
+                </div> <!-- placeholder -->
+            </div> <!-- jumbotron-->
+        </div> <!-- body -->
     </body>
+    <script type="text/javascript">
+        $('.nav-justified li').click(function(){
+                $('.active').removeClass('active');
+                $(this).addClass('active');
+                $("#placeholder").empty();
+                switch($(this).attr('id'))
+                {
+                    case 'ExA':
+                        drawA();
+                        break;
+                    
+                    case 'ExB':
+                        drawB();
+                        break;
+
+                    case 'ExC':
+                        drawC();
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+        
+        function drawA(){
+            var d1 = [];
+
+            for (var i = 0; i < 14; i += 0.5)
+                d1.push([i, Math.sin(i)]);
+            
+            var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+
+            var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+
+            $.plot($("#placeholder"), [d1, d2, d3]);
+        };
+
+        function drawB(){
+            var d1 = [];
+            for (var i = 0; i < 14; i += 0.5)
+                d1.push([i, Math.sin(i)]);
+                
+            var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+
+            var d3 = [];
+            for(var i = 0; i < 14; i += 0.5)
+                    d3.push([i, Math.cos(i)]);
+
+            $.plot($("#placeholder"), [
+                {
+                    data: d1,
+                    label: 'one',
+                    lines: {show: true, fill: true}
+                },
+                {
+                    data: d2,
+                    bars: {show: true}
+                },
+                {
+                    data: d3,
+                    points: {show: true}
+                }
+            ]);
+        };
+
+        function drawC(){
+            var d1 = [];
+            for (var i = 0; i < 14; i += 0.5)
+                d1.push([i, Math.sin(i)]);
+                
+            var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+
+            var d3 = [];
+
+            var data = [d1, d2, d3];
+            for(var i = 0; i < 14; i += 0.5)
+                    d3.push([i, Math.cos(i)]);
+
+            $.plot($("#placeholder"), [
+                {
+                    data: d1,
+                    label: 'one',
+                    lines: {show: true}
+                },
+                {
+                    data: d2,
+                    label: 'two',
+                    lines: {show: true}
+                },
+                {
+                    data: d3,
+                    label: 'three',
+                    lines: {show: true}
+                }
+            ]);
+        };
+    </script>
 </html>
