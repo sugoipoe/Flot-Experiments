@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap 101 Template</title>
+        <title>Flot Examples</title>
 
         <!-- Bootstrap -->
         <link href="static/css/bootstrap.min.css" rel="stylesheet">
@@ -116,35 +116,50 @@
         };
 
         function drawC(){
-            var d1 = [];
-            for (var i = 0; i < 14; i += 0.5)
-                d1.push([i, Math.sin(i)]);
-                
-            var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+            somePlot = null;
+            togglePlot = function(seriesIdx)
+            {
+                var someData = somePlot.getData();
+                someData[seriesIdx].lines.show = !someData[seriesIdx].lines.show;
+                somePlot.setData(someData);
+                somePlot.draw();
+            }
 
-            var d3 = [];
+            var data = [
+            {
+                label: 'one',
+                data: [[0, 1], [2, 4], [4, 7], [5, 2]],
+                idx: 0
+            },
+            {
+                label: 'two',
+                data: [[0, 3], [4, 8], [8, 5], [9, 13]],
+                idx: 1
+            },
+            {
+                label: 'three',
+                data: [[0, 2], [1, 5], [3, 8]],
+                idx: 2
+            }
+            ];
 
-            var data = [d1, d2, d3];
-            for(var i = 0; i < 14; i += 0.5)
-                    d3.push([i, Math.cos(i)]);
-
-            $.plot($("#placeholder"), [
+            somePlot = $.plot($("#placeholder"), data, 
+            {
+                series:
                 {
-                    data: d1,
-                    label: 'one',
-                    lines: {show: true}
+                    lines:
+                    {
+                        show: true
+                    }
                 },
+                legend: 
                 {
-                    data: d2,
-                    label: 'two',
-                    lines: {show: true}
-                },
-                {
-                    data: d3,
-                    label: 'three',
-                    lines: {show: true}
+                    labelFormatter: function(label, series)
+                    {
+return '<a href="#" onClick="togglePlot('+series.idx+'); return false;">'+label+'</a>';
+                    }
                 }
-            ]);
+            });
         };
     </script>
 </html>
