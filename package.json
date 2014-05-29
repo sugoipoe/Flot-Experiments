@@ -1,0 +1,30 @@
+{
+  "name": "Flot Experiments"
+  "version": "0.0.0",
+  "description": "Examples and experiments using Flot",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "~0.8.5",
+    "express": "~3.4.8",
+    "jslint": "~0.2.10",
+    "json2csv": "~2.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TohFoou/Flot-Experiments.git"
+  },
+  "keywords": [
+    "flot",
+    "test"
+  ],
+  "author": "Eric Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TohFoou/Flot-Experiments/issues"
+  },
+  "homepage": "https://github.com/TohFoou/Flot-Experiments"
+}
